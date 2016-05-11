@@ -15,6 +15,8 @@ if (argv.debug) {
 }
 
 var SLACK_TOKEN = process.env.SLACK_TOKEN;
+var PORT = argv.port || 10007;
+
 if (!SLACK_TOKEN) {
     throw "SLACK_TOKEN is not set!";
 }
@@ -52,6 +54,7 @@ function handleRequest(req) {
         });
 }
 
-server.listen(8888, () => {
-    console.log("server bound");
+server.listen(10007, () => {
+    var addr = server.address();
+    console.log("Server listening at %j", addr);
 });

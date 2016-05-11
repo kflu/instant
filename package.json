@@ -1,8 +1,11 @@
 {
-  "name": "instant",
+  "name": "instant-notification",
   "version": "1.0.0",
   "description": "A notification submission service",
   "main": "lib/index.js",
+  "bin": {
+    "instant": "lib/index.js"
+  },
   "scripts": {
     "compile": "babel -d lib src",
     "test": "echo \"Error: no test specified\" && exit 1"
