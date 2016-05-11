@@ -4,7 +4,8 @@
   "description": "A notification submission service",
   "main": "lib/index.js",
   "bin": {
-    "instant": "lib/index.js"
+    "instant": "lib/bin/instant.js",
+    "instant-winsrv": "lib/bin/winsrv.js"
   },
   "scripts": {
     "compile": "babel -d lib src",
@@ -15,9 +16,9 @@
   "dependencies": {
     "babel-polyfill": "^6.7.4",
     "bluebird": "^3.3.4",
+    "commander": "^2.9.0",
     "express": "^4.13.4",
     "lodash": "^4.6.1",
-    "minimist": "^1.2.0",
     "request": "^2.72.0",
     "request-debug": "^0.2.0",
     "request-promise": "^3.0.0",
@@ -32,5 +33,8 @@
     "eslint": "^2.7.0",
     "eslint-config-airbnb": "^6.2.0",
     "eslint-plugin-react": "^4.3.0"
+  },
+  "optionalDependencies": {
+    "node-windows": "^0.1.11"
   }
 }
