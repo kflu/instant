@@ -15,12 +15,16 @@
   "dependencies": {
     "babel-polyfill": "^6.7.4",
     "bluebird": "^3.3.4",
+    "express": "^4.13.4",
     "lodash": "^4.6.1",
     "minimist": "^1.2.0",
     "request": "^2.72.0",
-    "request-debug": "^0.2.0"
+    "request-debug": "^0.2.0",
+    "request-promise": "^3.0.0",
+    "winston": "^2.2.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.8.0",
     "babel-plugin-syntax-async-functions": "^6.5.0",
     "babel-plugin-transform-class-properties": "^6.6.0",
     "babel-plugin-transform-regenerator": "^6.6.5",

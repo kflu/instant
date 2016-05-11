@@ -2,11 +2,15 @@
 
 require('babel-polyfill');
 
-var net = require('net');
 var process = require('process');
-var request = require('request');
+var request = require('request-promise');
 var util = require('util');
 var _ = require('lodash');
+var Promise = require('bluebird');
+var winston = require('winston');
+winston.level = 'info';
+
+var express = require('express');
 
 var argv = require('minimist')(process.argv.slice(2));
 
@@ -27,42 +31,39 @@ if (!SLACK_TOKEN) {
     throw "SLACK_TOKEN is not set!";
 }
 
-var server = net.createServer((socket) => {
-    socket.setEncoding('utf8');
-    socket.on('data', handleRequest);
-    socket.on('error', util.inspect);
-    socket.on('close', util.inspect);
-    socket.on('connect', util.inspect);
-});
-
-function parse(req) {
-    var separator = req.indexOf(" ");
-    var channel = req.substring(0, separator);
-    var msg = req.substring(separator);
-    return [channel, msg];
-}
-
-function handleRequest(req) {
-    var parsed = parse(req);
-    var channel = parsed[0],
-        msg = parsed[1];
-
-    request({
+async function handleRequest(channel, msg) {
+    return await request({
         url: 'https://slack.com/api/chat.postMessage',
         qs: {
             token: SLACK_TOKEN,
             channel,
             text: msg,
             username: USERNAME
-        }},
-        (err, resp, body) => {
-            // Use --debug to see the results
-        });
+        }});
 }
 
-server.listen(PORT, () => {
-    var addr = server.address();
-    console.log("Server listening at %j", addr);
+var app = express();
+
+var routerV1 = express
+    .Router()
+    .all('/:channel', async (req, res) => {
+        var channel = req.params.channel,
+            msg = req.query.msg;
+
+        winston.info(JSON.stringify({channel, msg}));
+        var body = await handleRequest(channel, msg);
+        winston.info(body);
+        res.send(body);
+    });
+
+app.use('/v1', routerV1)
+   .use((err, req, res, next) => {
+       winston.info(err.stack);
+       res.sendStatus(500);
+   });
+
+app.listen(PORT, () => {
+    winston.info(`Listening on port ${PORT}`);
 });
 
 function help() {
