@@ -31,7 +31,7 @@ One easy way to test is by using `netcat`:
 
 And here's what you'll get on your phone:
 
-<img src="doc/phone_notification.png" alt="screenshot" style="width: 150px;"/>
+<img src="doc/phone_notification.png" alt="screenshot" width="300"/>
 
 Usage
 ----
