@@ -10,12 +10,18 @@ var _ = require('lodash');
 
 var argv = require('minimist')(process.argv.slice(2));
 
+if (argv.help) {
+    help();
+    process.exit();
+}
+
 if (argv.debug) {
     require('request-debug')(request);
 }
 
 var SLACK_TOKEN = process.env.SLACK_TOKEN;
 var PORT = argv.port || 10007;
+var USERNAME = argv.username || 'instant-notification';
 
 if (!SLACK_TOKEN) {
     throw "SLACK_TOKEN is not set!";
@@ -47,14 +53,20 @@ function handleRequest(req) {
             token: SLACK_TOKEN,
             channel,
             text: msg,
-            username: 'serene'
+            username: USERNAME
         }},
         (err, resp, body) => {
             // Use --debug to see the results
         });
 }
 
-server.listen(10007, () => {
+server.listen(PORT, () => {
     var addr = server.address();
     console.log("Server listening at %j", addr);
 });
+
+function help() {
+    console.log("instant [--debug] [--port=[10007]] [--slack-token=<token>] [--username=<username>]");
+    console.log("   If slack token is not specified, it must be present as the environment");
+    console.log("   variable SLACK_TOKEN");
+}
