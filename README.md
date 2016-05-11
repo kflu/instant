@@ -1,6 +1,9 @@
 Instant Notification
 ====
 
+** NOTE: this API is switched to use a HTTP based rather than TCP based
+protocol. Document to be updated soon.**
+
 `instant-notification` is a service that helps local applications to send
 channel-based notification. Currently it can send notification to Slack. In
 order to use this program, you need a Slack team, set up a [bot][1], and obtain
@@ -42,3 +45,5 @@ Usage
        variable SLACK_TOKEN
 
 [1]: https://api.slack.com/bot-users
+
+<!-- vim: se ft=markdown tw=80: -->
