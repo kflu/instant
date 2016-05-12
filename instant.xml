@@ -1,0 +1,9 @@
+<service>
+  <id>instant</id>
+  <name>instant notification</name>
+  <description>instant notification</description>
+  <executable>node</executable>
+  <env name="SLACK_TOKEN" value="{{SLACK_TOKEN}}"/>
+  <arguments>"{{dir}}\lib\bin\instant.js"</arguments>
+  <logmode>rotate</logmode>
+</service>

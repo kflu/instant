@@ -20,7 +20,7 @@ if (argv.debug) {
     require('request-debug')(request);
 }
 
-var SLACK_TOKEN = process.env.SLACK_TOKEN;
+var SLACK_TOKEN = argv.slackToken || process.env.SLACK_TOKEN;
 var PORT = argv.port || 10007;
 var USERNAME = argv.username || 'instant-notification';
 
