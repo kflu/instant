@@ -21,7 +21,7 @@ if (argv.debug) {
 }
 
 var SLACK_TOKEN = argv.slackToken || process.env.SLACK_TOKEN;
-var PORT = argv.port || 10007;
+var PORT = argv.port || parseInt(process.env.INSTANT_PORT) || 10007;
 var USERNAME = argv.username || 'instant-notification';
 
 if (!SLACK_TOKEN) {

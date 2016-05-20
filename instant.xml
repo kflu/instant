@@ -4,6 +4,8 @@
   <description>instant notification</description>
   <executable>node</executable>
   <env name="SLACK_TOKEN" value="{{SLACK_TOKEN}}"/>
+  <persistent_env name="INSTANT_PORT" value="10007" />
+  <persistent_env name="INSTANT_URL" value="http://localhost:10007" />
   <arguments>"{{dir}}\lib\bin\instant.js"</arguments>
   <logmode>rotate</logmode>
 </service>
